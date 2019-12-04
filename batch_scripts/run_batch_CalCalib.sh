@@ -1,6 +1,7 @@
 #! /bin/bash
 ##### A batch submission script based on an earlier version by Richard
 echo "Running as ${USER}"
+SPEC=$1
 ### Check you have provided the first argument correctly
 if [[ ! $1 =~ ^("HMS"|"SHMS")$ ]]; then
     echo "Please specify spectrometer, HMS or SHMS"
@@ -18,8 +19,9 @@ historyfile=hist.$( date "+%Y-%m-%d_%H-%M-%S" ).log
 batch="${USER}_Job.txt"
 ##Input run numbers##                                                                      
 ##Point this to the location of your input run list                                            
-inputFile="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH/batch_scripts/inputRuns"
-## Tape stub, you can point directly to a taped file and the farm job will do the jgetting for you, don't call it in your script!                                                      
+inputFile="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH/InputRunLists/Calib_Runs_All"
+#inputFile="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH/InputRunLists/inputRuns"
+## Tape stub, you can point directly to a taped file and the farm job will do the jgetting for you, don't call it in your script!                   
 MSSstub='/mss/hallc/spring17/raw/coin_all_%05d.dat'
 auger="augerID.tmp"
 while true; do
@@ -49,10 +51,10 @@ while true; do
                 echo "Running ${batch} for ${runNum}"
                 cp /dev/null ${batch}
                 ##Creation of batch script for submission##                                       
-                echo "PROJECT: c-kaonlt" >> ${batch} # Or whatever your project is!
-                echo "TRACK: analysis" >> ${batch} ## Use this track for production running
+		echo "PROJECT: c-kaonlt" >> ${batch} # Or whatever your project is!
+		echo "TRACK: analysis" >> ${batch} ## Use this track for production running
                 #echo "TRACK: debug" >> ${batch} ### Use this track for testing, higher priority
-                echo "JOBNAME: CalCalib_${SPPEC}_${runNum}" >> ${batch} ## Change to be more specific if you want
+                echo "JOBNAME: CalCalib${SPPEC}_${runNum}" >> ${batch} ## Change to be more specific if you want
 		# Request double the tape file size in space, for trunctuated replays edit down as needed
 		# Note, unless this is set typically replays will produce broken root files
 		echo "DISK_SPACE: "$(( $TapeFileSize * 2 ))" GB" >> ${batch}

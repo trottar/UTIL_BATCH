@@ -77,22 +77,32 @@ fi
 ### Kind of a stupid way to get the correct file but prevents constantly writing to a file when analysing
 ### hcana on 1 event writes configs used to a file which is then read to get the correct file later.
 ### Probably a better way of doing this with some if/while statement and tee but decided to go for the stupid (but working) solution for now
+touch "Tmp_"$RUNNUMBER"_"$OPT".txt"
 eval "$REPLAYPATH/hcana -l -q  \"SCRIPTS/COIN/CALIBRATION/"$OPT"Cal_Calib_Coin.C($RUNNUMBER, 1)\"" | tee "Tmp_"$RUNNUMBER"_"$OPT".txt"
 if [ $OPT == "HMS" ]; then
-    CALIBFILE=$(grep -o "PARAM/HMS/CAL/hcal_calib.*" "Tmp_"$RUNNUMBER"_"$OPT".txt")
+    if [ "$RUNNUMBER" -le 8375 ]; then 
+	CALIBFILE=$(grep -o "PARAM/HMS/CAL/hcal_.*" "Tmp_"$RUNNUMBER"_"$OPT".txt")
+	#CALIBFILE=$(grep -o "PARAM/HMS/CAL/CALIB/hcal_.*" "Tmp_"$RUNNUMBER"_"$OPT".txt")
+    fi
+    if [ "$RUNNUMBER" -ge 8376 ]; then
+	CALIBFILE=$(grep -o "PARAM/HMS/CAL/new_hcal*" "Tmp_"$RUNNUMBER"_"$OPT".txt")
+	#CALIBFILE=$(grep -o "PARAM/HMS/CAL/CALIB/hcal_.*" "Tmp_"$RUNNUMBER"_"$OPT".txt")
+    fi
 fi
 if [ $OPT == "SHMS" ]; then
     CALIBFILE=$(grep -o "PARAM/SHMS/CAL/pcal_calib.*" "Tmp_"$RUNNUMBER"_"$OPT".txt")
 fi
+sleep 10
 rm -rf "Tmp_"$RUNNUMBER"_"$OPT".txt"
 rm -rf "$REPLAYPATH/ROOTfilesCalCalib/"$OPT"_Cal_Calib_"$RUNNUMBER"_1.root" 
 eval "$REPLAYPATH/hcana -l -q \"SCRIPTS/COIN/CALIBRATION/"$OPT"Cal_Calib_Coin.C($RUNNUMBER,$MAXEVENTS)\""
 ROOTFILE="$REPLAYPATH/ROOTfilesCalCalib/"$OPT"_Cal_Calib_"$RUNNUMBER"_"$MAXEVENTS".root" 
 cd "$REPLAYPATH/CALIBRATION/"$spec"_cal_calib/"
 # Copy the input file with a one specific to this run
-cp "input.dat" "Input/input"_$RUNNUMBER".dat"
-# Snip off the parameters in the input file leaving only the setup conditions
-sed -i '8, $d' "Input/input"_$RUNNUMBER".dat"
+cp "input.dat" "Input/input_"$RUNNUMBER".dat"
+# Snip off the parameters in the input file leaving only the setup conditions and add a new line to the file (which is CRUCIAL!)
+sed -i '8, $d' "Input/input_"$RUNNUMBER".dat"
+echo $'\n' >> "Input/input_"$RUNNUMBER".dat"
 # We now need to copy in the relevant parameters that were used in the replay
 # Copies block of parameters and appends them to our input file, expects block of params to be in first 21 lines!
 sed -n '1, 21p' $REPLAYPATH"/"$CALIBFILE | tee -a "Input/input_"$RUNNUMBER".dat"
