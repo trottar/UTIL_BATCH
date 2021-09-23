@@ -1,5 +1,7 @@
 Lists of files sorted by beam energy. 
 
+Split into Kaon or Pion run data folders.
+
 Split into ProductionLH2, ProductionDummy, LumiScan, HeepSingles and HeepCoin.
 
 No junk runs included.
