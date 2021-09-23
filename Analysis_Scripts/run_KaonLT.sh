@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2021-09-23 17:49:32 trottar"
+# Time-stamp: "2021-09-23 18:15:42 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -46,25 +46,12 @@ echo ""
 echo "Run number must be a positive integer value"
 echo "Run type must be one of - Prod - Lumi - HeePSing - HeePCoin - fADC - Optics - Case sensitive!"
 echo "Target must be one of - LH2 - LD2 - Dummy10cm - Carbon0p5 - AuFoil - Optics1 - Optics2 - CarbonHole - Case sensitive!"
-RUNNUMBER=$1
-RUNTYPE=$2
-TARGET=$3
-MAXEVENTS=$4
 
+RUNTYPE=$1
+RUNNUMBER=$2
+MAXEVENTS=$3
 # Need to change these a little, should check whether arguments are good or not REGARDLESS of whether they're blank
-if [[ -z "$1" || ! "$RUNNUMBER" =~ ^-?[0-9]+$ ]]; then # Check an argument was provided and that it is a positive integer, if not, prompt for one
-    echo ""
-    echo "I need a valid run number - MUST be a positive integer"
-    while true; do
-	echo ""
-	read -p "Please type in a run number (positive integer) as input or press ctrl-c to exit : " RUNNUMBER
-	case $RUNNUMBER in
-	    '' | *[!0-9]*);; # If the input is NOT a positive integer (or it's just an empty string), don't break the loop
-	    *) break;;
-	esac
-    done
-fi
-if [[ -z "$2" || ! "$RUNTYPE" =~ Prod|Lumi|HeePSing|HeePCoin|fADC|Optics ]]; then # Check the 2nd argument was provided and that it's one of the valid options
+if [[ -z "$1" || ! "$RUNTYPE" =~ Prod|Lumi|HeePSing|HeePCoin|fADC|Optics ]]; then # Check the 2nd argument was provided and that it's one of the valid options
     echo ""
     echo "I need a valid run type"
     while true; do
@@ -76,19 +63,19 @@ if [[ -z "$2" || ! "$RUNTYPE" =~ Prod|Lumi|HeePSing|HeePCoin|fADC|Optics ]]; the
 	esac
     done
 fi
-if [[ -z "$3" || ! "$TARGET" =~ LH2|LD2|Dummy10cm|Carbon0p5|AuFoil|Optics1|Optics2|CarbonHole ]]; then # Check the 3rd argument was provided and that it's one of the valid options
+if [[ -z "$2" || ! "$RUNNUMBER" =~ ^-?[0-9]+$ ]]; then # Check an argument was provided and that it is a positive integer, if not, prompt for one
     echo ""
-    echo "I need a valid target"
-    while true; do	
+    echo "I need a valid run number - MUST be a positive integer"
+    while true; do
 	echo ""
-	read -p "Please type in a target from - LH2 - LD2 - Dummy10cm - Carbon0p5 - AuFoil - Optics1 - Optics2 - CarbonHole - Case sensitive! - or press ctrl-c to exit : " TARGET
-	case $TARGET in
-	    '');; # If blank, prompt again
-	    'LH2'|'LD2'|'Dummy10cm'|'Carbon0p5'|'AuFoil'|'Optics1'|'Optics2'|'CarbonHole') break;; # If a valid option, break the loop and continue
+	read -p "Please type in a run number (positive integer) as input or press ctrl-c to exit : " RUNNUMBER
+	case $RUNNUMBER in
+	    '' | *[!0-9]*);; # If the input is NOT a positive integer (or it's just an empty string), don't break the loop
+	    *) break;;
 	esac
     done
 fi
-if [[ $4 -eq "" ]]; then
+if [[ $3 -eq "" ]]; then
     echo "Only Run Number entered...I'll assume -1 events!" 
     MAXEVENTS=-1 
 fi
