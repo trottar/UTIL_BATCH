@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2021-09-23 20:23:07 trottar"
+# Time-stamp: "2021-09-23 20:23:37 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -39,7 +39,7 @@ if [[ $2 -eq "" ]]; then
 fi
 
 UTILPATH="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH"
-ANASCRIPT="\"${UTILPATH}/Analysis_Scripts/run_KaonLT.sh\" ${RUNTYPE}"
+ANASCRIPT="'${UTILPATH}/Analysis_Scripts/run_KaonLT.sh' ${RUNTYPE}"
 
 echo "${UTILPATH}"
 echo "${ANASCRIPT}"
