@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2021-09-23 22:02:24 trottar"
+# Time-stamp: "2021-09-23 22:29:13 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -45,7 +45,6 @@ echo "Required arguments are run number, run type and target"
 echo ""
 echo "Run number must be a positive integer value"
 echo "Run type must be one of - Prod - Lumi - HeePSing - HeePCoin - fADC - Optics - Case sensitive!"
-echo "Target must be one of - LH2 - LD2 - Dummy10cm - Carbon0p5 - AuFoil - Optics1 - Optics2 - CarbonHole - Case sensitive!"
 
 RUNTYPE=$1
 RUNNUMBER=$2
