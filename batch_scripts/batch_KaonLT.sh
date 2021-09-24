@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2021-09-23 19:35:36 trottar"
+# Time-stamp: "2021-09-23 20:03:09 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -18,6 +18,7 @@
 ##### Modify required resources as needed!
 
 echo "Running as ${USER}"
+
 RUNTYPE=$1
 MAXEVENTS=$2
 if [[ -z "$1" || ! "$RUNTYPE" =~ Prod|Lumi|HeePSing|HeePCoin|fADC|Optics ]]; then # Check the 2nd argument was provided and that it's one of the valid options
@@ -37,7 +38,7 @@ if [[ $2 -eq "" ]]; then
     MAXEVENTS=-1 
 fi
 
-UTILPATH="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH"
+UTILPATH='/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH'
 ANASCRIPT='"${UTILPATH}/Analysis_Scripts/run_KaonLT.sh" ${RUNTYPE}'
 
 ##Output history file##
@@ -78,8 +79,8 @@ while true; do
                 cp /dev/null ${batch}
                 ##Creation of batch script for submission##
                 echo "PROJECT: c-kaonlt" >> ${batch}
-                echo "TRACK: analysis" >> ${batch}
-                #echo "TRACK: debug" >> ${batch} ### Use for testing
+                #echo "TRACK: analysis" >> ${batch}
+                echo "TRACK: debug" >> ${batch} ### Use for testing
                 echo "JOBNAME: KaonLT_${RUNNUMBER}" >> ${batch}
                 # Request disk space depending upon raw file size
                 echo "DISK_SPACE: "$(( $TapeFileSize * 2 ))" GB" >> ${batch}
