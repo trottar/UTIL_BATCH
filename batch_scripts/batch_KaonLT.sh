@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2021-09-23 20:03:09 trottar"
+# Time-stamp: "2021-09-23 20:12:13 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -45,7 +45,7 @@ ANASCRIPT='"${UTILPATH}/Analysis_Scripts/run_KaonLT.sh" ${RUNTYPE}'
 historyfile=hist.$( date "+%Y-%m-%d_%H-%M-%S" ).log
 ##Input run numbers##
 #inputFile="${UTILPATH}/InputRunLists/Kaon_Data/${RUNTYPE}_ALL"
-inputFile="${UTILPATH}/InputRunLists/Kaon_Data/${RUNTYPE}_Test"
+inputFile='${UTILPATH}/InputRunLists/Kaon_Data/${RUNTYPE}_Test'
 ## Tape stub
 MSSstub='/mss/hallc/spring17/raw/coin_all_%05d.dat'
 auger="augerID.tmp"
