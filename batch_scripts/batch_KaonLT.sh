@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2021-09-23 20:18:45 trottar"
+# Time-stamp: "2021-09-23 20:19:55 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -38,8 +38,7 @@ if [[ $2 -eq "" ]]; then
     MAXEVENTS=-1 
 fi
 
-#UTILPATH='/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH'
-UTILPATH='/group/c-kaonlt/USERS/trottar/hallc_replay_lt/UTIL_BATCH'
+UTILPATH="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH"
 ANASCRIPT='"${UTILPATH}/Analysis_Scripts/run_KaonLT.sh" ${RUNTYPE}'
 
 ##Output history file##
