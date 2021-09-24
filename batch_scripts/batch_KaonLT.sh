@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2021-09-23 20:23:37 trottar"
+# Time-stamp: "2021-09-23 21:55:38 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -40,9 +40,6 @@ fi
 
 UTILPATH="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH"
 ANASCRIPT="'${UTILPATH}/Analysis_Scripts/run_KaonLT.sh' ${RUNTYPE}"
-
-echo "${UTILPATH}"
-echo "${ANASCRIPT}"
 
 ##Output history file##
 historyfile=hist.$( date "+%Y-%m-%d_%H-%M-%S" ).log
