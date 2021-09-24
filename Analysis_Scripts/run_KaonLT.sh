@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2021-09-23 18:15:42 trottar"
+# Time-stamp: "2021-09-23 22:02:24 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -80,6 +80,8 @@ if [[ $3 -eq "" ]]; then
     MAXEVENTS=-1 
 fi
 
+source /site/12gev_phys/softenv.sh 2.3
+source /apps/root/6.18.04/setroot_CUE.bash
 if [[ $RUNTYPE == "Prod" ]]; then
     echo "Running production analysis script - ${UTILPATH}/scripts/online_kaon_physics/kaon_prod_replay_analysis_sw.sh"
     eval '"${UTILPATH}/scripts/online_kaon_physics/kaon_prod_replay_analysis_sw.sh" ${RUNNUMBER} ${MAXEVENTS}'
