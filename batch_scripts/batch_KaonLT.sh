@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2021-09-23 21:55:38 trottar"
+# Time-stamp: "2021-09-25 18:30:30 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -44,8 +44,8 @@ ANASCRIPT="'${UTILPATH}/Analysis_Scripts/run_KaonLT.sh' ${RUNTYPE}"
 ##Output history file##
 historyfile=hist.$( date "+%Y-%m-%d_%H-%M-%S" ).log
 ##Input run numbers##
-#inputFile="${UTILPATH}/InputRunLists/Kaon_Data/${RUNTYPE}_ALL"
-inputFile="${UTILPATH}/InputRunLists/Kaon_Data/${RUNTYPE}_Test"
+inputFile="${UTILPATH}/InputRunLists/Kaon_Data/${RUNTYPE}_ALL"
+#inputFile="${UTILPATH}/InputRunLists/Kaon_Data/${RUNTYPE}_Test"
 ## Tape stub
 MSSstub='/mss/hallc/spring17/raw/coin_all_%05d.dat'
 auger="augerID.tmp"
@@ -79,8 +79,8 @@ while true; do
                 cp /dev/null ${batch}
                 ##Creation of batch script for submission##
                 echo "PROJECT: c-kaonlt" >> ${batch}
-                #echo "TRACK: analysis" >> ${batch}
-                echo "TRACK: debug" >> ${batch} ### Use for testing
+                echo "TRACK: analysis" >> ${batch}
+                #echo "TRACK: debug" >> ${batch} ### Use for testing
                 echo "JOBNAME: KaonLT_${RUNNUMBER}" >> ${batch}
                 # Request disk space depending upon raw file size
                 echo "DISK_SPACE: "$(( $TapeFileSize * 2 ))" GB" >> ${batch}
